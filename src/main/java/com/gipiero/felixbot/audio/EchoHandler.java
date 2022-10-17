@@ -1,4 +1,4 @@
-package com.gipiero.musicbot.audio;
+package com.gipiero.felixbot.audio;
 
 import net.dv8tion.jda.api.audio.AudioReceiveHandler;
 import net.dv8tion.jda.api.audio.AudioSendHandler;

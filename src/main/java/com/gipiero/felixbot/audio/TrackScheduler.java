@@ -1,4 +1,4 @@
-package com.gipiero.musicbot.audio;
+package com.gipiero.felixbot.audio;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;

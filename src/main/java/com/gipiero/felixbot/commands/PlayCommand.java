@@ -1,6 +1,6 @@
-package com.gipiero.musicbot.commands;
+package com.gipiero.felixbot.commands;
 
-import com.gipiero.musicbot.audio.TrackScheduler;
+import com.gipiero.felixbot.audio.TrackScheduler;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;

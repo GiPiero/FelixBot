@@ -1,7 +1,7 @@
-package com.gipiero.musicbot;
+package com.gipiero.felixbot;
 
-import com.gipiero.musicbot.commands.EchoCommand;
-import com.gipiero.musicbot.commands.PlayCommand;
+import com.gipiero.felixbot.commands.EchoCommand;
+import com.gipiero.felixbot.commands.PlayCommand;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

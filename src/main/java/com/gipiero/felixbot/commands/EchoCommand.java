@@ -1,6 +1,6 @@
-package com.gipiero.musicbot.commands;
+package com.gipiero.felixbot.commands;
 
-import com.gipiero.musicbot.audio.EchoHandler;
+import com.gipiero.felixbot.audio.EchoHandler;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;

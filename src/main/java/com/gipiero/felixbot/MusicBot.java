@@ -1,4 +1,4 @@
-package com.gipiero.musicbot;
+package com.gipiero.felixbot;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
