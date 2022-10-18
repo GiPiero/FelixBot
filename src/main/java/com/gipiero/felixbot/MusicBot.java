@@ -10,6 +10,7 @@ import java.util.EnumSet;
 
 public class MusicBot {
     private final ShardManager shardManager;
+
     public MusicBot() throws LoginException {
         EnumSet<GatewayIntent> intents = EnumSet.of(
                 GatewayIntent.GUILD_MESSAGES,
@@ -23,7 +24,7 @@ public class MusicBot {
         shardManager = builder.build();
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         System.out.println("Starting MusicBot");
         try {
             MusicBot bot = new MusicBot();

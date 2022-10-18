@@ -22,40 +22,36 @@ public class PlayCommand {
         Member member = event.getMember();
         GuildVoiceState voiceState = member.getVoiceState();
         VoiceChannel channel = voiceState.getChannel().asVoiceChannel();
-        if (channel != null)
-        {
+        if (channel != null) {
             connectTo(channel, event.getChannel().asTextChannel(), identifier);
             onConnecting(channel, event.getChannel().asTextChannel());
-        }
-        else
-        {
+        } else {
             onUnknownChannel(event.getChannel(), "your voice channel");
         }
 
     }
 
-    private static void connectTo(VoiceChannel channel, TextChannel textChannel, String identifier)
-    {
+    private static void connectTo(VoiceChannel channel, TextChannel textChannel, String identifier) {
         Guild guild = channel.getGuild();
         AudioPlayerManager playerManager = new DefaultAudioPlayerManager(); // make just one of these for whole app
 
         AudioSourceManagers.registerRemoteSources(playerManager);
         AudioPlayer player = playerManager.createPlayer();
-        TrackScheduler trackScheduler = new TrackScheduler(player);
+        TrackScheduler trackScheduler = new TrackScheduler(player, textChannel);
         player.addListener(trackScheduler);
         guild.getAudioManager().openAudioConnection(channel);
         guild.getAudioManager().setSendingHandler(trackScheduler);
         playerManager.loadItem(identifier, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack track) {
-                //textChannel.sendMessage("Track loaded").queue();
+                textChannel.sendMessage("Track loaded").queue();
                 System.out.println("Track loaded");
                 trackScheduler.queue(track);
             }
 
             @Override
             public void playlistLoaded(AudioPlaylist playlist) {
-                //textChannel.sendMessage("Playlist loaded").queue();
+                textChannel.sendMessage("Playlist loaded").queue();
                 System.out.println("Playlist loaded");
                 for (AudioTrack track : playlist.getTracks()) {
                     trackScheduler.queue(track);
@@ -64,27 +60,25 @@ public class PlayCommand {
 
             @Override
             public void noMatches() {
-                //textChannel.sendMessage("Could not find match").queue();
+                textChannel.sendMessage("Could not find match").queue();
                 System.out.println("Could not find match");
             }
 
             @Override
             public void loadFailed(FriendlyException exception) {
-                //textChannel.sendMessage("Load failed for some reason").queue();
+                textChannel.sendMessage("Load failed for some reason").queue();
                 System.out.println("Load failed for some reason");
             }
         });
     }
 
-    private static void onConnecting(VoiceChannel channel, TextChannel textChannel)
-    {
-        //textChannel.sendMessage("Connecting to " +channel.getName()).queue();
-        System.out.println("Connecting to " +channel.getName());
+    private static void onConnecting(VoiceChannel channel, TextChannel textChannel) {
+        textChannel.sendMessage("Connecting to " + channel.getName()).queue();
+        System.out.println("Connecting to " + channel.getName());
     }
 
-    private static void onUnknownChannel(MessageChannel channel, String comment)
-    {
-        //channel.sendMessage("Unable to connect to ``" + comment + "``, no such channel!").queue();
+    private static void onUnknownChannel(MessageChannel channel, String comment) {
+        channel.sendMessage("Unable to connect to ``" + comment + "``, no such channel!").queue();
         System.out.println("Unable to connect to ``" + comment + "``, no such channel!");
     }
 

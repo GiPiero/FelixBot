@@ -13,8 +13,10 @@ public class Listener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event)
     {
         if (event.getAuthor().isBot()) return;
+
         Message message = event.getMessage();
         String content = message.getContentRaw();
+
         if (content.equals("!ping"))
         {
             MessageChannel channel = event.getChannel();
@@ -24,7 +26,8 @@ public class Listener extends ListenerAdapter {
         {
             EchoCommand.onEchoCommand(event);
         }
-        else if (content.startsWith("!play ")){
+        else if (content.startsWith("!play "))
+        {
             String arg = content.substring("!play ".length());
             PlayCommand.onPlayCommand(event, arg);
         }
