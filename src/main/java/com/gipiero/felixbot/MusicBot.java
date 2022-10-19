@@ -1,5 +1,6 @@
 package com.gipiero.felixbot;
 
+import com.gipiero.felixbot.listeners.CommandListener;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
@@ -20,7 +21,7 @@ public class MusicBot {
         String token = System.getenv("BOT_TOKEN");
         DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(token, intents);
         builder.setStatus(OnlineStatus.ONLINE);
-        builder.addEventListeners(new Listener());
+        builder.addEventListeners(new CommandListener());
         shardManager = builder.build();
     }
 

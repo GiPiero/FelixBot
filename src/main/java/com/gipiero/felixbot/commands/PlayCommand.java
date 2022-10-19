@@ -14,19 +14,16 @@ import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class PlayCommand {
-    public static void onPlayCommand(MessageReceivedEvent event, String identifier) {
-        Member member = event.getMember();
+    public static void onPlayCommand(Member member, TextChannel tc, String identifier) {
         GuildVoiceState voiceState = member.getVoiceState();
         VoiceChannel channel = voiceState.getChannel().asVoiceChannel();
         if (channel != null) {
-            connectTo(channel, event.getChannel().asTextChannel(), identifier);
-            onConnecting(channel, event.getChannel().asTextChannel());
+            connectTo(channel, tc, identifier);
+            onConnecting(channel, tc);
         } else {
-            onUnknownChannel(event.getChannel(), "your voice channel");
+            onUnknownChannel(tc, "your voice channel");
         }
 
     }
@@ -77,7 +74,7 @@ public class PlayCommand {
         System.out.println("Connecting to " + channel.getName());
     }
 
-    private static void onUnknownChannel(MessageChannel channel, String comment) {
+    private static void onUnknownChannel(TextChannel channel, String comment) {
         channel.sendMessage("Unable to connect to ``" + comment + "``, no such channel!").queue();
         System.out.println("Unable to connect to ``" + comment + "``, no such channel!");
     }
